@@ -5,8 +5,10 @@ import { LessonPlanInput, GeneratedLessonPlan, SavedLessonPlan } from './types';
 import { generateLessonPlanContent } from './services/geminiService';
 import LessonPreview from './components/LessonPreview';
 
-// The logo is now stored locally in the project root as logo.png
-const SCHOOL_LOGO = './public/logo.png';
+import logo from './assets/logo.png';
+
+// The logo is now imported to ensure Vite processes it correctly
+const SCHOOL_LOGO = logo;
 
 const App: React.FC = () => {
   const [formData, setFormData] = useState<LessonPlanInput>({
