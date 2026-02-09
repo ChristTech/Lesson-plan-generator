@@ -10,9 +10,9 @@ const SCHOOL_LOGO = './logo.png';
 
 const App: React.FC = () => {
   const [formData, setFormData] = useState<LessonPlanInput>({
-    schoolName: 'TOLPBY SCHOOL TUNGA MAJE',
+    schoolName: 'TOLPBY GRACE AND GLORY ACADEMY TUNGA MAJE',
     address: ' Abuja, Nigeria',
-    teacherName: 'Anslem Sule',
+    teacherName: 'Adebisi Victor',
     term: 'First term',
     session: '2025/2026',
     subject: 'Civic Education',
@@ -181,7 +181,7 @@ const App: React.FC = () => {
                 <Sparkles className="w-5 h-5 text-blue-500" />
                 <h2 className="text-lg font-semibold text-slate-800">New Lesson Details</h2>
               </div>
-              <p className="text-xs text-slate-400">Template Version 2025</p>
+              <p className="text-xs text-slate-400">Template Version 2026</p>
             </div>
 
             <form onSubmit={handleGenerate} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -190,7 +190,7 @@ const App: React.FC = () => {
                 <input 
                   type="text" name="schoolName" value={formData.schoolName} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                  placeholder="e.g. TOLPBY SCHOOL TUNGA MAJE" required
+                  placeholder="e.g. TOLPBY GRACE AND GLORY ACADEMY TUNGA MAJE" required
                 />
               </div>
 
@@ -451,7 +451,7 @@ const App: React.FC = () => {
             <div className="flex items-center gap-3 text-white font-bold text-lg opacity-80">
                <img src={SCHOOL_LOGO} alt="Logo" className="w-8 h-8 rounded-md object-contain bg-white/10 p-0.5" 
                     onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-               Smart Lesson Plan Generator
+               Tolpby Smart Lesson Plan Generator
             </div>
             <div className="flex flex-col items-center gap-1 mt-4">
               <p className="font-bold text-blue-400">Built by CHRISTTech</p>
@@ -461,7 +461,7 @@ const App: React.FC = () => {
               </a>
             </div>
             <div className="h-px w-full bg-slate-800 my-4"></div>
-            <p>&copy; 2024. Standardized Educational Resource Tool.</p>
+            <p>&copy; 2026. Standardized Educational Resource Tool.</p>
           </div>
         </div>
       </footer>
