@@ -6,7 +6,7 @@ import { generateLessonPlanContent } from './services/geminiService';
 import LessonPreview from './components/LessonPreview';
 
 // The logo is now stored locally in the project root as logo.png
-const SCHOOL_LOGO = './logo.png';
+const SCHOOL_LOGO = '/logo.png';
 
 const App: React.FC = () => {
   const [formData, setFormData] = useState<LessonPlanInput>({
@@ -59,17 +59,17 @@ const App: React.FC = () => {
 
   const addToCollection = useCallback(() => {
     if (!currentPlan) return;
-    
+
     const newSavedPlan: SavedLessonPlan = {
       id: crypto.randomUUID(),
       input: { ...formData },
       plan: currentPlan
     };
-    
+
     setSavedPlans(prev => [...prev, newSavedPlan]);
     setCurrentPlan(null);
     setSuccessMessage(`Week ${formData.week} plan added to collection!`);
-    
+
     const nextWeek = parseInt(formData.week) + 1;
     setFormData(prev => ({ ...prev, week: nextWeek.toString() }));
 
@@ -87,11 +87,11 @@ const App: React.FC = () => {
     if (!element || savedPlans.length === 0) return;
 
     const opt = {
-      margin:       [0.2, 0.2, 0.2, 0.2],
-      filename:     `Weekly_Lesson_Plans_${formData.subject.replace(/\s+/g, '_')}.pdf`,
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2, useCORS: true, logging: false },
-      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      margin: [0.2, 0.2, 0.2, 0.2],
+      filename: `Weekly_Lesson_Plans_${formData.subject.replace(/\s+/g, '_')}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, logging: false },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
     // @ts-ignore
@@ -131,7 +131,7 @@ const App: React.FC = () => {
     const footer = "</body></html>";
     const content = element.innerHTML;
     const blob = new Blob([header + content + footer], { type: 'application/msword' });
-    
+
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
@@ -149,8 +149,8 @@ const App: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="bg-blue-600 p-1 rounded-lg flex items-center justify-center">
-              <img src={SCHOOL_LOGO} alt="School Logo" className="w-10 h-10 object-contain rounded-md" 
-                   onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+              <img src={SCHOOL_LOGO} alt="School Logo" className="w-10 h-10 object-contain rounded-md"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
             </div>
             <div>
               <h1 className="text-xl font-bold text-slate-900 leading-none">Smart Lesson Plan</h1>
@@ -187,7 +187,7 @@ const App: React.FC = () => {
             <form onSubmit={handleGenerate} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="space-y-1.5 lg:col-span-2">
                 <label className="text-sm font-medium text-slate-700">School Name</label>
-                <input 
+                <input
                   type="text" name="schoolName" value={formData.schoolName} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                   placeholder="e.g. TOLPBY SCHOOL TUNGA MAJE" required
@@ -196,7 +196,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5 lg:col-span-2">
                 <label className="text-sm font-medium text-slate-700">School Address</label>
-                <input 
+                <input
                   type="text" name="address" value={formData.address} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                   placeholder="School address" required
@@ -205,7 +205,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Teacher's Name</label>
-                <input 
+                <input
                   type="text" name="teacherName" value={formData.teacherName} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                 />
@@ -213,7 +213,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Term</label>
-                <select 
+                <select
                   name="term" value={formData.term} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                 >
@@ -225,7 +225,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Session</label>
-                <input 
+                <input
                   type="text" name="session" value={formData.session} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                 />
@@ -233,7 +233,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Week</label>
-                <input 
+                <input
                   type="number" name="week" value={formData.week} onChange={handleInputChange} min="1" max="15"
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                   required
@@ -242,7 +242,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Subject</label>
-                <input 
+                <input
                   type="text" name="subject" value={formData.subject} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                   required
@@ -251,7 +251,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Theme</label>
-                <input 
+                <input
                   type="text" name="theme" value={formData.theme} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                 />
@@ -259,7 +259,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Topic</label>
-                <input 
+                <input
                   type="text" name="topic" value={formData.topic} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                   required
@@ -268,7 +268,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Sub-Topic</label>
-                <input 
+                <input
                   type="text" name="subTopic" value={formData.subTopic} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                   required
@@ -277,7 +277,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Date</label>
-                <input 
+                <input
                   type="text" name="date" value={formData.date} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                 />
@@ -285,7 +285,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Time Range</label>
-                <input 
+                <input
                   type="text" name="time" value={formData.time} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                   placeholder="e.g. 8:30am - 9:10am"
@@ -294,7 +294,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Class</label>
-                <input 
+                <input
                   type="text" name="className" value={formData.className} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                 />
@@ -302,7 +302,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Average Age</label>
-                <input 
+                <input
                   type="text" name="averageAge" value={formData.averageAge} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                 />
@@ -310,7 +310,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Sex</label>
-                <input 
+                <input
                   type="text" name="sex" value={formData.sex} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                 />
@@ -318,7 +318,7 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">No. in Class</label>
-                <input 
+                <input
                   type="text" name="noInClass" value={formData.noInClass} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                 />
@@ -326,14 +326,14 @@ const App: React.FC = () => {
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Duration</label>
-                <input 
+                <input
                   type="text" name="duration" value={formData.duration} onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                 />
               </div>
 
               <div className="lg:col-span-4 pt-4 border-t border-slate-100 flex gap-3 items-center">
-                <button 
+                <button
                   type="submit" disabled={isLoading}
                   className="flex-1 md:flex-none px-12 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
                 >
@@ -369,9 +369,9 @@ const App: React.FC = () => {
         {/* Current Generation Result */}
         {currentPlan && (
           <div className="space-y-4 animate-in fade-in zoom-in-95 duration-300">
-            <LessonPreview 
-              input={formData} 
-              plan={currentPlan} 
+            <LessonPreview
+              input={formData}
+              plan={currentPlan}
               onAddToCollection={addToCollection}
               schoolLogo={SCHOOL_LOGO}
             />
@@ -392,14 +392,14 @@ const App: React.FC = () => {
                 </div>
               </div>
               <div className="flex gap-2">
-                <button 
+                <button
                   onClick={downloadCombinedWord}
                   className="flex items-center gap-2 px-4 py-2 bg-white text-slate-700 font-semibold rounded-lg border border-slate-300 shadow-sm hover:bg-slate-50 transition-all"
                 >
                   <FileDown className="w-4 h-4" />
                   Export All (Word)
                 </button>
-                <button 
+                <button
                   onClick={downloadCombinedPdf}
                   className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 transition-all"
                 >
@@ -418,11 +418,11 @@ const App: React.FC = () => {
               </div>
               <div className="divide-y-2 divide-slate-100">
                 {savedPlans.map((item) => (
-                  <LessonPreview 
-                    key={item.id} 
-                    input={item.input} 
-                    plan={item.plan} 
-                    isInsideCollection={true} 
+                  <LessonPreview
+                    key={item.id}
+                    input={item.input}
+                    plan={item.plan}
+                    isInsideCollection={true}
                     schoolLogo={SCHOOL_LOGO}
                   />
                 ))}
@@ -434,8 +434,8 @@ const App: React.FC = () => {
         {!currentPlan && savedPlans.length === 0 && !isLoading && (
           <div className="flex flex-col items-center justify-center py-24 text-slate-400 bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl">
             <div className="bg-blue-50 p-6 rounded-full mb-4 opacity-50 flex items-center justify-center">
-              <img src={SCHOOL_LOGO} alt="Logo" className="w-16 h-16 grayscale object-contain rounded-lg" 
-                   onError={(e) => { (e.target as HTMLImageElement).src = 'https://raw.githubusercontent.com/lucide-react/lucide/main/icons/graduation-cap.svg'; }} />
+              <img src={SCHOOL_LOGO} alt="Logo" className="w-16 h-16 grayscale object-contain rounded-lg"
+                onError={(e) => { (e.target as HTMLImageElement).src = 'https://raw.githubusercontent.com/lucide-react/lucide/main/icons/graduation-cap.svg'; }} />
             </div>
             <h3 className="text-xl font-bold text-slate-600">No Plans Yet</h3>
             <p className="text-sm text-slate-500 max-w-xs text-center mt-2">
@@ -449,9 +449,9 @@ const App: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col items-center gap-4">
             <div className="flex items-center gap-3 text-white font-bold text-lg opacity-80">
-               <img src={SCHOOL_LOGO} alt="Logo" className="w-8 h-8 rounded-md object-contain bg-white/10 p-0.5" 
-                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-               Smart Lesson Plan Generator
+              <img src={SCHOOL_LOGO} alt="Logo" className="w-8 h-8 rounded-md object-contain bg-white/10 p-0.5"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+              Smart Lesson Plan Generator
             </div>
             <div className="flex flex-col items-center gap-1 mt-4">
               <p className="font-bold text-blue-400">Built by CHRISTTech</p>
